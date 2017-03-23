@@ -1,38 +1,5 @@
 <h1>Burgers!</h1>
 
-
-
-<ol>
-  {{#each burger}}
-    {{#unless this.devoured}}
-      <li>
-        {{this.burger_name}}
-
-        <form action="/{{this.id}}?_method=PUT" method="POST">
-          <input type="hidden" name="devour" value="true">
-          <button type="submit">Devour Me</button>
-        </form>
-      </li>
-    {{/unless}}
-  {{/each}}
-</ol>
-
-
-<ul>
-  {{#each burger}}
-    {{#if this.devoured}}
-      <li>
-        {{this.burger_name}}
-
-        <form action="/{{this.id}}?_method=PUT" method="POST">
-          <input type="hidden" name="sleepy" value="false">
-          <button type="submit">Throw Up!</button>
-        </form>
-      </li>
-    {{/if}}
-  {{/each}}
-</ul>
-
 <h2>Add a burger</h2>
 <form class="create-update-form" action="/" method="POST">
 
@@ -43,8 +10,7 @@
 
   <div class="form-group">
     <label for="devour">Devour?</label><br>
-    <input type="radio" name="sleepy" value="1" checked> Devour!<br>
-    <input type="radio" name="sleepy" value="0"> Throw up!
+    <button type="submit" name="devour" value="1"> Devour!<br>
   </div>
 
   <button type="submit">Add Burger</button>
