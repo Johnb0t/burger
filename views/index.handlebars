@@ -1,35 +1,39 @@
-<h1>Burgers!</h1>
+<h1 class="center-align">Burgers!</h1>
 
-<h2>Add a burger</h2>
-    <form class="create-update-form" action="/" method="POST">
-          <div class="form-group">
-            <label for="burger">Burger Name:</label>
-            <input type="text" id="burger" name="burger_name">
+  <div class="container">
+
+    <h4 class="center-align">Add a burger</h4>
+      <div class="form-group center-align">
+        <form class="create-update-form" action="/" method="POST">
+              <div class="form-group">
+                <label for="burger">Burger Name:</label>
+                <input type="text" id="burger" name="burger_name">
+              </div>
+              <button type="submit">Add Burger</button>
+        </form>
+      </div>
+    <div id="results" class="center-align">
+        {{#each burgers}}
+          <div id="toBeEaten" class="center-align">
+            {{#unless this.devoured}}
+              <h4>{{this.id}} {{this.burger_name}}</h4>
+              <form action="/{{this.id}}?_method=PUT" method="POST">
+                <input type="hidden" name="devoured" value="true">
+                <button type="submit" id="devour">Devour!<br>
+              </form>
+            {{/unless}}  
           </div>
-          <button type="submit">Add Burger</button>
-    </form>
-
-<div id="results">
-    {{#each burgers}}
-      <div id="toBeEaten">
-        {{#unless this.devoured}}
-          <h2> {{this.burger_name}} {{this.id}} </h2>
-          <form action="/{{this.id}}?_method=PUT" method="POST">
-            <input type="hidden" name="devoured" value="true">
-            <button type="submit" id="devour">Devour!<br>
-          </form>
-        {{/unless}}  
-      </div>
-    {{/each}}
-    {{#each burgers}}
-      <div id="eaten">
-        {{#if this.devoured}}
-          <h2> {{this.burger_name}} {{this.id}} </h2>
-          <form action="/{{this.id}}?_method=PUT" method="POST">
-            <input type="hidden" name="devoured" value="false">
-            <button type="submit" id="throwUp">Throw Up!<br>
-          </form>
-        {{/if}}
-      </div>
-    {{/each}}
-</div>
+        {{/each}}
+        {{#each burgers}}
+          <div id="eaten" class="center-align">
+            {{#if this.devoured}}
+              <h4>{{this.id}} {{this.burger_name}}</h4>
+              <form action="/{{this.id}}?_method=PUT" method="POST">
+                <input type="hidden" name="devoured" value="false">
+                <button type="submit" id="throwUp">Put It Back<br>
+              </form>
+            {{/if}}
+          </div>
+        {{/each}}
+    </div>
+  </div>
